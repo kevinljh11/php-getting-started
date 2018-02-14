@@ -32,4 +32,4 @@ echo "平码:".$data[1].$abc[$data[1] % 12].",".$data[2].$abc[$data[2] % 12].","
 echo "特码:".$data[7].$abc[$data[7] % 12]."<br><br>";
 echo "下期:".$data[8]."期 星期".$data[11]." ".$data[9]."月".$data[10]."日";
 echo "</font></body></html>";
-?>?
+?>
