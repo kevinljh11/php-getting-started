@@ -15,21 +15,21 @@ $data1 = curl_exec($ch);  */
 
 $data=explode(",",$data1);
 
-$abc=array("Ñò","ºï","¼¦","¹·","Öí","Êó","Å£","»¢","ÍÃ","Áú","Éß","Âí");
+$abc=array("ç¾Š","çŒ´","é¸¡","ç‹—","çŒª","é¼ ","ç‰›","è™","å…”","é¾™","è›‡","é©¬");
 
 print('<!DOCTYPE HTML>
 <html>
 <head>
-  <title>6hc¿ª½±x1</title>
+  <title>6hc</title>
   <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no" />
 </head>
 <body bgcolor="black">
 <font color="#C0C0C0">');
 
-echo "µ±Ç°:".str_replace('{"k":"',"",$data[0])."ÆÚ<br><br>";
-echo "Æ½Âë:".$data[1].$abc[$data[1] % 12].",".$data[2].$abc[$data[2] % 12].",".$data[3].$abc[$data[3] % 12].",".$data[4].$abc[$data[4] % 12].",".$data[5].$abc[$data[5] % 12].",".$data[6].$abc[$data[6] % 12]."<br><br>";
-echo "ÌØÂë:".$data[7].$abc[$data[7] % 12]."<br><br>";
-echo "ÏÂÆÚ:".$data[8]."ÆÚ ĞÇÆÚ".$data[11]." ".$data[9]."ÔÂ".$data[10]."ÈÕ";
+echo "å½“å‰:".str_replace('{"k":"',"",$data[0])."æœŸ<br><br>";
+echo "å¹³ç :".$data[1].$abc[$data[1] % 12].",".$data[2].$abc[$data[2] % 12].",".$data[3].$abc[$data[3] % 12].",".$data[4].$abc[$data[4] % 12].",".$data[5].$abc[$data[5] % 12].",".$data[6].$abc[$data[6] % 12]."<br><br>";
+echo "ç‰¹ç :".$data[7].$abc[$data[7] % 12]."<br><br>";
+echo "ä¸‹æœŸ:".$data[8]."æœŸ æ˜ŸæœŸ".$data[11]." ".$data[9]."æœˆ".$data[10]."æ—¥";
 echo "</font></body></html>";
 ?>?
