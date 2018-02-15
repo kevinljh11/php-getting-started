@@ -3,7 +3,6 @@ ini_set('user_agent','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, li
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('date.timezone','Asia/Shanghai'); 
 
-//$abc=array("羊","猴","鸡","狗","猪","鼠","牛","虎","兔","龙","蛇","马");
 $abc=array("猪","狗","鸡","猴","羊","马","蛇","龙","兔","虎","牛","鼠");
 $abcd=array("平","特");
 $url1="http://bet.hkjc.com/marksix/index.aspx?lang=ch";
@@ -26,7 +25,7 @@ $url1="http://bet.hkjc.com/marksix/index.aspx?lang=ch";
 print('<!DOCTYPE HTML>
 <html>
 <head>
-    <title>hk6_xrea2</title>
+    <title>hk6_heroku</title>
 	<meta http-equiv=Content-Type content="text/html;charset=utf-8">
     <meta name="viewport" content="width=300px, user-scalable=no" />
 <!--</head><body>-->');
@@ -40,7 +39,6 @@ $item=$xml->xpath('//td[@class="content"]');
 echo "上期".(string)$item[11]."期<br>";
 echo "上期".(string)$item[12]."<br>";
 
-//$item2=$xml->xpath('//td[@colspan="3"]');
 $item2=$xml->xpath('//td[@style="padding:15px 8px 0px 0px;"]');
 $item3=$item2[0]->table->tr->td;
 
@@ -58,9 +56,6 @@ echo $nowno3.$abc[$nowno3 % 12].",";
 echo "<br>".$abcd[$index]."码：";	
 $index++;
 }
-//$gif=str_replace("/marksix/info/images/","./hksix/",(string)$value->img->attributes()[0]);
-//$jpgurl="<img src=\"".$gif."\" />";
-//echo $jpgurl;
 }
 echo "</body></html>";  
 ?>
