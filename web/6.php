@@ -1,35 +1,66 @@
 <?php
-ini_set('user_agent','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.22 (KHTML, like Gecko) QQBrowser/5.6.1 Safari/537.22'); 
+ini_set('user_agent','Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36'); 
 error_reporting(E_ALL ^ E_NOTICE);
 ini_set('date.timezone','Asia/Shanghai'); 
 
-$url="http://kj1.915678.com/bmjg.js";
+//$abc=array("羊","猴","鸡","狗","猪","鼠","牛","虎","兔","龙","蛇","马");
+$abc=array("猪","狗","鸡","猴","羊","马","蛇","龙","兔","虎","牛","鼠");
+$abcd=array("平","特");
+$url1="http://bet.hkjc.com/marksix/index.aspx?lang=ch";
 
-$data1=file_get_contents($url);
-
-/* $ch = curl_init(); 
-curl_setopt ($ch, CURLOPT_URL, $url); 
-curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
-curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT,10); 
-$data1 = curl_exec($ch);  */
-
-$data=explode(",",$data1);
-
-$abc=array("羊","猴","鸡","狗","猪","鼠","牛","虎","兔","龙","蛇","马");
+    function http_get_data($url) {  
+          
+        $ch = curl_init ();  
+        curl_setopt ( $ch, CURLOPT_CUSTOMREQUEST, 'GET' );  
+        curl_setopt ( $ch, CURLOPT_SSL_VERIFYPEER, false );  
+        curl_setopt ( $ch, CURLOPT_URL, $url );  
+        ob_start ();  
+        curl_exec ( $ch );  
+        $return_content = ob_get_contents ();  
+        ob_end_clean ();  
+          
+        $return_code = curl_getinfo ( $ch, CURLINFO_HTTP_CODE );  
+        return $return_content;  
+    } 
 
 print('<!DOCTYPE HTML>
 <html>
 <head>
-  <title>6hc</title>
-  <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no" />
-</head>
-<body bgcolor="black">
-<font color="#C0C0C0">');
+    <title>hk6_xrea2</title>
+	<meta http-equiv=Content-Type content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=300px, user-scalable=no" />
+<!--</head><body>-->');
+echo "</head><body>";
 
-echo "当前:".str_replace('{"k":"',"",$data[0])."期<br><br>";
-echo "平码:".$data[1].$abc[$data[1] % 12].",".$data[2].$abc[$data[2] % 12].",".$data[3].$abc[$data[3] % 12].",".$data[4].$abc[$data[4] % 12].",".$data[5].$abc[$data[5] % 12].",".$data[6].$abc[$data[6] % 12]."<br><br>";
-echo "特码:".$data[7].$abc[$data[7] % 12]."<br><br>";
-echo "下期:".$data[8]."期 星期".$data[11]." ".$data[9]."月".$data[10]."日";
-echo "</font></body></html>";
+$html=file_get_contents($url1);
+$dom=new DOMDocument;
+$dom->loadHTML($html);
+$xml=simplexml_import_dom($dom);
+$item=$xml->xpath('//td[@class="content"]');
+echo "上期".(string)$item[11]."期<br>";
+echo "上期".(string)$item[12]."<br>";
+
+//$item2=$xml->xpath('//td[@colspan="3"]');
+$item2=$xml->xpath('//td[@style="padding:15px 8px 0px 0px;"]');
+$item3=$item2[0]->table->tr->td;
+
+$index=0;
+foreach($item3 as $value)
+{
+$nowno1=(string)$value->img->attributes()[0];
+$nowno2=explode("/marksix/info/images/icon/no_",$nowno1);
+$nowno3=explode(".",$nowno2[1])[0];
+if (strlen($nowno3)==2)
+{
+echo $nowno3.$abc[$nowno3 % 12].",";
+}else
+{
+echo "<br>".$abcd[$index]."码：";	
+$index++;
+}
+//$gif=str_replace("/marksix/info/images/","./hksix/",(string)$value->img->attributes()[0]);
+//$jpgurl="<img src=\"".$gif."\" />";
+//echo $jpgurl;
+}
+echo "</body></html>";  
 ?>
